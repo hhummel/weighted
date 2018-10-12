@@ -11,26 +11,26 @@ def index(request):
     }
     return render(request, 'a/message.html', c)
 
-def redirection(request, target, responder):
-    #try:
-        obj = Targets.objects.get(index=target)
 
-        print(obj.index, obj.url, target, responder) 
+def redirection(request, target, responder):
+    '''Key for anonymous respondent is !'''
+    try:
+        obj = Targets.objects.get(index=target)
 
         #Save the reponse event the Response table
         response = Response()
         response.target = obj
-        response.respondent = responder
+        if responder != '!':
+            response.respondent = responder
         response.date = datetime.now()
         response.save()
 
         #Redirect
         return HttpResponseRedirect(obj.url)
 
-    #except Exception:
+    except Exception:
         message = "Sorry, link was not found on server"
         c = {
             "message": "Sorry, link was not found on server",
         }
         return render(request, 'a/message.html', c)
-
