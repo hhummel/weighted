@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<int:target>/', views.redirection, name='redirection'),
+    path('<int:target>/<str:responder>', views.redirection, name='redirection'),
 ]
 

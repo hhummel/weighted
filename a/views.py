@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.utils.timezone import datetime
+from .models import Targets, Response
 
 # Create your views here.
 
@@ -9,19 +11,26 @@ def index(request):
     }
     return render(request, 'a/message.html', c)
 
-def redirection(request, target):
-    targets = {
-        1: 'https://gloriousgrain.com/bread/unsubscribe',
-        2: 'https://recyclobuddy.com/app/cancel'
-    }
+def redirection(request, target, responder):
+    #try:
+        obj = Targets.objects.get(index=target)
 
-    if target not in targets:
+        print(obj.index, obj.url, target, responder) 
+
+        #Save the reponse event the Response table
+        response = Response()
+        response.target = obj
+        response.respondent = responder
+        response.date = datetime.now()
+        response.save()
+
+        #Redirect
+        return HttpResponseRedirect(obj.url)
+
+    #except Exception:
+        message = "Sorry, link was not found on server"
         c = {
             "message": "Sorry, link was not found on server",
         }
         return render(request, 'a/message.html', c)
-    else:
-        url = targets[target]
-        print("Redirected to %s" % url)
-        return HttpResponseRedirect(url)
 

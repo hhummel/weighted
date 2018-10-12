@@ -9,7 +9,4 @@ class Targets(models.Model):
 class Response(models.Model):
     target = models.ForeignKey(Targets, on_delete=models.CASCADE)
     respondent = models.CharField(max_length=15)
-    c = {
-        "message": "Welcome to w8d!",
-    }
     date = models.DateTimeField('response date')
