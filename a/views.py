@@ -12,7 +12,9 @@ def index(request):
     return render(request, 'a/message.html', c)
 
 def redirection(request, target, responder):
-    '''Key for anonymous respondent is !'''
+    '''Key for anonymous respondent is ! target == 0 means don't redirect'''
+    if target == 0:
+        return index(request)
     try:
         obj = Targets.objects.get(index=target)
 
@@ -36,15 +38,9 @@ def redirection(request, target, responder):
 
 def responder_redirection(request, responder):
     from .subdomain import SUBDOMAIN
-    if SUBDOMAIN > 0:
-        return redirection(request, TARGET, responder)
-    else:
-        return index(request)
+    return redirection(request, SUBDOMAIN, responder)
 
 def default_redirection(request):
     from .subdomain import SUBDOMAIN
-    if SUBDOMAIN > 0:
-        return redirection(request, TARGET, None)
-    else:
-        return index(request)
+    return redirection(request, SUBDOMAIN, None)
 
