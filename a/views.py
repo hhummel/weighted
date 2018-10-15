@@ -5,12 +5,13 @@ from .models import Targets, Response
 
 # Create your views here.
 
+TARGET = 1
+
 def index(request):
     c = {
         "message": "Welcome to w8d!",
     }
     return render(request, 'a/message.html', c)
-
 
 def redirection(request, target, responder):
     '''Key for anonymous respondent is !'''
@@ -34,3 +35,6 @@ def redirection(request, target, responder):
             "message": "Sorry, link was not found on server",
         }
         return render(request, 'a/message.html', c)
+
+def default_redirection(request, responder):
+    return redirection(request, TARGET, responder)
