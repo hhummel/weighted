@@ -5,7 +5,6 @@ from .models import Targets, Response
 
 # Create your views here.
 
-
 def index(request):
     c = {
         "message": "Welcome to w8d!",
@@ -35,9 +34,17 @@ def redirection(request, target, responder):
         }
         return render(request, 'a/message.html', c)
 
-def default_redirection(request, responder):
-    TARGET = 1
-    if TARGET > 0:
+def responder_redirection(request, responder):
+    from .subdomain import SUBDOMAIN
+    if SUBDOMAIN > 0:
         return redirection(request, TARGET, responder)
     else:
         return index(request)
+
+def default_redirection(request):
+    from .subdomain import SUBDOMAIN
+    if SUBDOMAIN > 0:
+        return redirection(request, TARGET, None)
+    else:
+        return index(request)
+
