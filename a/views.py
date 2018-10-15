@@ -9,7 +9,7 @@ def index(request):
     c = {
         "message": "Welcome to w8d!",
     }
-    return render(request, 'a/message.html', c)
+    return render(request, 'a/balls.html', c)
 
 def redirection(request, target, responder):
     '''Key for anonymous respondent is ! target == 0 means don't redirect'''
