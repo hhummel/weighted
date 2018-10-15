@@ -37,7 +37,7 @@ def redirection(request, target, responder):
 
 def default_redirection(request, responder):
     TARGET = 1
-    if TARGET > 0
+    if TARGET > 0:
         return redirection(request, TARGET, responder)
     else:
         return index(request)
