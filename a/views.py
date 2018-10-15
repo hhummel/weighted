@@ -5,7 +5,6 @@ from .models import Targets, Response
 
 # Create your views here.
 
-TARGET = 1
 
 def index(request):
     c = {
@@ -37,4 +36,8 @@ def redirection(request, target, responder):
         return render(request, 'a/message.html', c)
 
 def default_redirection(request, responder):
-    return redirection(request, TARGET, responder)
+    TARGET = 1
+    if TARGET > 0
+        return redirection(request, TARGET, responder)
+    else:
+        return index(request)
