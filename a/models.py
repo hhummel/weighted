@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Targets(models.Model):
-    index = models.CharField(max_length=15, primary_key=True)
+    index_key = models.CharField(max_length=15, primary_key=True)
     url = models.URLField(max_length=200, null=False)
 
 class Response(models.Model):
