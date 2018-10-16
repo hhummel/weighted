@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.utils.timezone import datetime
 from .models import Targets, Response
-
 # Create your views here.
 
 def index(request):
@@ -37,10 +36,10 @@ def redirection(request, target, responder):
         return render(request, 'a/message.html', c)
 
 def responder_redirection(request, responder):
-    from .subdomain import SUBDOMAIN
+    from w8d.passwords import SUBDOMAIN
     return redirection(request, SUBDOMAIN, responder)
 
 def default_redirection(request):
-    from .subdomain import SUBDOMAIN
+    from w8d.passwords import SUBDOMAIN
     return redirection(request, SUBDOMAIN, None)
 
