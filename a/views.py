@@ -29,9 +29,8 @@ def redirection(request, target, responder):
         return HttpResponseRedirect(obj.url)
 
     except Exception:
-        message = "Sorry, link was not found on server"
         c = {
-            "message": "Sorry, link was not found on server",
+            "message": "Sorry, link was not found on server target=" + target,
         }
         return render(request, 'a/message.html', c)
 
