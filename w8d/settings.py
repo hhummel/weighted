@@ -15,17 +15,18 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+from .passwords import MYSQL_HOST, MYSQL_PORT, MYSQL_NAME, MYSQL_USER, MYSQL_PASSWORD, THE_SECRET, HOST_LIST, SUBDOMAIN, DEBUG_STATUS
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*3s5-yg%4rur$)ie3ts96w_mnaayi+9@0^ju^g$p($4e(ct&0!'
+SECRET_KEY = THE_SECRET
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG_STATUS
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = HOST_LIST
 
 
 # Application definition
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'w8d.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': MYSQL_HOST,
+        'PORT': MYSQL_PORT,
+        'NAME': MYSQL_NAME,
+        'USER': MYSQL_USER,
+        'PASSWORD': MYSQL_PASSWORD,
     }
 }
 
