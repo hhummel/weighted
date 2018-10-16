@@ -15,7 +15,7 @@ def redirection(request, target, responder):
     if target == 0:
         return index(request)
     try:
-        obj = Targets.objects.get(index=str(target))
+        obj = Targets.objects.get(index_key=target)
 
         #Save the reponse event the Response table
         response = Response()
