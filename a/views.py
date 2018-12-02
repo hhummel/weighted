@@ -31,7 +31,8 @@ def redirection(request, target, responder):
         #Save the reponse event the Response table
         response = Response()
         response.target = obj
-        if responder != '!' and p.match(responder):
+        #if responder != '!' and p.match(responder):
+        if responder != '!':
             response.respondent = responder
         response.date = datetime.now()
         response.save()
