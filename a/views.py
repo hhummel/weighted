@@ -21,7 +21,7 @@ def test(request):
 def redirection(request, target, responder):
     '''Key for anonymous respondent is ! target == 0 means don't redirect'''
     #Make matching pattern for responder
-    p = compile('[a-zA-Z0-9]+')
+    p = compile('^[a-zA-Z0-9]+$')
 
     if target == 0:
         return index(request)
@@ -31,8 +31,7 @@ def redirection(request, target, responder):
         #Save the reponse event the Response table
         response = Response()
         response.target = obj
-        #if responder != '!' and p.match(responder):
-        if responder != '!':
+        if responder != '!' and p.match(responder):
             response.respondent = responder
         response.date = datetime.now()
         response.save()
