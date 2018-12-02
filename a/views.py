@@ -28,13 +28,13 @@ def redirection(request, target, responder):
     try:
         obj = Targets.objects.get(index_key=target)
 
-        #Save the reponse event the Response table
+        #Save reponse event if not anonymous
         response = Response()
         response.target = obj
         if responder != '!' and p.match(responder):
             response.respondent = responder
-        response.date = datetime.now()
-        response.save()
+            response.date = datetime.now()
+            response.save()
 
         #Redirect
         return HttpResponseRedirect(obj.url)
