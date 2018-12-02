@@ -1,7 +1,9 @@
+from re import compile, match
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.utils.timezone import datetime
 from .models import Targets, Response
+
 # Create your views here.
 
 def index(request):
@@ -10,8 +12,17 @@ def index(request):
     }
     return render(request, 'a/balls.html', c)
 
+def test(request):
+    c = {
+        "message": "Test message",
+    }
+    return render(request, 'a/message.html', c)
+
 def redirection(request, target, responder):
     '''Key for anonymous respondent is ! target == 0 means don't redirect'''
+    #Make matching pattern for responder
+    p = compile('[a-zA-Z0-9]+')
+
     if target == 0:
         return index(request)
     try:
@@ -20,7 +31,7 @@ def redirection(request, target, responder):
         #Save the reponse event the Response table
         response = Response()
         response.target = obj
-        if responder != '!':
+        if responder != '!' and p.match(responder):
             response.respondent = responder
         response.date = datetime.now()
         response.save()

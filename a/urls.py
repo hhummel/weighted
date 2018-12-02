@@ -3,7 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<str:target>/<str:responder>', views.redirection, name='redirection'),
+    path('', views.test, name='test'),
 ]
 
